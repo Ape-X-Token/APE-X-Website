@@ -108,58 +108,54 @@
     <div id="app" class="container nj-news-wrapper pt-0">
       <div class="nj-news-body-wrapper d-block" data-anim-type="fade_in_up">
         <div class="nj-news-body">
-          <!-- 1) Price
-2) Total Supply (10M would be hard coded)
-3) Circulating supply (total supply - (totalFees (rounded to 9 decimals)*0.45/2
-4) burnt supply = totalFees * 0.45/2
-5) ape-x fees used for liquidity = totalFees * 0.55
-6) holders
-7) market cap* circulating supply -->
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
             <h3 class="nj-news-header">Price</h3>
             <p class="nj-news-body-text">${{stats.price}} / {{symbol}}</p>
           </div>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
-            <h3 class="nj-news-header">Total Supplies</h3>
+            <h3 class="nj-news-header">MCAP</h3>
+            <p class="nj-news-body-text">${{market_cap | fixed3}}</p>
+          </div>
+          <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+            <h3 class="nj-news-header">Total Supply</h3>
             <p class="nj-news-body-text">{{stats.supply | fixed3}} {{symbol}}</p>
           </div>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
-            <h3 class="nj-news-header">Circulating Supplies</h3>
-            <p class="nj-news-body-text">{{circulating_supplies | fixed3}} {{symbol}}</p>
+            <h3 class="nj-news-header">Circulating Supply</h3>
+            <p class="nj-news-body-text">{{circulating_supply | fixed3}} {{symbol}}</p>
           </div>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
-            <h3 class="nj-news-header">Burnt Supplies</h3>
-            <p class="nj-news-body-text">{{burnt_supplies | fixed3}} {{symbol}}</p>
+            <h3 class="nj-news-header">Burnt Supply</h3>
+            <p class="nj-news-body-text">{{burnt_supply | fixed3}} {{symbol}}</p>
           </div>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
-            <h3 class="nj-news-header">Liquidity Fees</h3>
-            <p class="nj-news-body-text">{{liquidity_fees | fixed3}} {{symbol}}</p>
+            <h3 class="nj-news-header">Liquidity Generated</h3>
+            <p class="nj-news-body-text">{{liquidity | fixed3}} {{symbol}}</p>
           </div>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
             <h3 class="nj-news-header">Holders</h3>
             <p class="nj-news-body-text">{{stats.holders|comma}}</p>
           </div>
-          <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
-            <h3 class="nj-news-header">MCAP</h3>
-            <p class="nj-news-body-text">${{market_cap | fixed3}}</p>
-          </div>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between" v-if="address">
-            <h3 class="nj-news-header">Address</h3>
-            <p class="nj-news-body-text">{{address}}</p>
+            <h3 class="nj-news-header">Wallet Address</h3>
+            <p class="nj-news-body-text">{{address | address}}</p>
           </div>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between" v-if="address">
             <h3 class="nj-news-header">Balance</h3>
-            <p class="nj-news-body-text">{{balance | fixed3}} {{symbol}}</p>
+            <p class="nj-news-body-text nowrap ml-md-5">${{balance * stats.price | fixed3}} = {{balance | fixed3}} {{symbol}}</p>
           </div>
           <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
-            <h3 class="nj-news-header">APY (Last 24hrs)</h3>
-            <p class="nj-news-body-text" v-if="address">
+            <div class="text-center text-md-left">
+              <h3 class="nj-news-header">Your Rewards Generated (24 hours)</h3>
+              <div class="small">Your rewards generated are calculated based on 24 hour average volume, your current account balance and current price. This will fluctuate as these variables change.</div>
+            </div>
+            <p class="nj-news-body-text nowrap ml-md-5" v-if="address">
               ${{apy * stats.price | fixed3}} = {{apy | fixed3}} {{symbol}}<br>
             </p>
-            <p class="nj-news-body-text" v-else-if="hasWallet">
-              <button class="btn btn-outline-light" @click="connect_wallet()">Connect Wallet</button>
+            <p class="nj-news-body-text  ml-md-5" v-else-if="hasWallet">
+              <button class="btn btn-outline-light nowrap" @click="connect_wallet()">Connect Wallet</button>
             </p>
-            <p class="nj-news-body-text" v-else>
+            <p class="nj-news-body-text  nowrap ml-md-5" v-else>
               No MetaMask
             </p>
           </div>
@@ -378,7 +374,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-  <script src="js/wallet.js"></script>
+  <script src="js/wallet.min.js"></script>
 
 </body>
 

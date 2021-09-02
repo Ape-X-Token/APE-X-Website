@@ -9,3 +9,7 @@
     color: transparent;
 
 }
+
+.nowrap {
+    white-space: nowrap !important;
+}
