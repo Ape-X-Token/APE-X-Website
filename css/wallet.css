@@ -1,0 +1,11 @@
+[v-cloak] {
+    display: none;
+}
+
+.outlined {
+    font-weight: 900;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #fff;
+    color: transparent;
+
+}
