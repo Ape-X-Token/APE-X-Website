@@ -2646,4 +2646,8 @@ only screen and (max-device-width: 740px) {
   margin-bottom: 20px;
 }
 
+.nj-navbar-logo .navbar-item {
+  color: white;
+}
+
 /*# sourceMappingURL=../../sass */
